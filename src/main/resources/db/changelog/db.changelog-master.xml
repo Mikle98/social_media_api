@@ -1,0 +1,7 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="classpath:db/changelog/scripts/001_ddl_create_user_table.sql" relativeToChangelogFile="false" />
+    <include file="classpath:db/changelog/scripts/002_ddl_create_friends_table.sql" relativeToChangelogFile="false" />
+    <include file="classpath:db/changelog/scripts/003_ddl_create_post_table.sql" relativeToChangelogFile="false" />
+</databaseChangeLog>

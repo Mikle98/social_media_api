@@ -1,4 +1,4 @@
-# job4j_social_media_api
+# job4j_social_media_api 
 
 ## О проекте
 
@@ -11,6 +11,8 @@ Java 17
 Spring Boot 3.3.0
 
 PostgreSQL 16
+
+Liquibase 4.27
 
 ## Требования к окружению
 
