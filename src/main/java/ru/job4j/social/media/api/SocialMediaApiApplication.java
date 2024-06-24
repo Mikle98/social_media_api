@@ -1,8 +1,7 @@
-package ru.job4j.socialmediaapi;
+package ru.job4j.social.media.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication

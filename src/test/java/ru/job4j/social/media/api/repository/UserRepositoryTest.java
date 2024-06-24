@@ -1,4 +1,4 @@
-package ru.job4j.socialmediaapi.repository;
+package ru.job4j.social.media.api.repository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import ru.job4j.socialmediaapi.SocialMediaApiApplication;
-import ru.job4j.socialmediaapi.model.User;
+import ru.job4j.social.media.api.model.User;
+import ru.job4j.social.media.api.SocialMediaApiApplication;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

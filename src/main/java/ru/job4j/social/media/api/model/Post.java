@@ -1,4 +1,4 @@
-package ru.job4j.socialmediaapi.model;
+package ru.job4j.social.media.api.model;
 
 import jakarta.persistence.*;
 
