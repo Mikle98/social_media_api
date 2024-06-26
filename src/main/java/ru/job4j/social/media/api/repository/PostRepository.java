@@ -8,6 +8,7 @@ import ru.job4j.social.media.api.model.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface PostRepository extends CrudRepository<Post, Long> {
     public List<Post> findByUser(User user);
