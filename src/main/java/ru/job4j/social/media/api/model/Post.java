@@ -22,6 +22,6 @@ public class Post {
     private LocalDateTime created;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JoinColumn(name = "userId")
+    private User userId;
 }

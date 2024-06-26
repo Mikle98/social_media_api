@@ -40,8 +40,8 @@ class FriendRepositoryTest {
     @Test
     public void whenAddFriendThenFindId() {
         var friend = new Friend();
-        friend.setUserMain(user);
-        friend.setUserFriend(user2);
+        friend.setToUser(user);
+        friend.setFromUser(user2);
         friend.setStatus("friend");
         friendRepository.save(friend);
         var found = friendRepository.findById(friend.getId());
@@ -52,8 +52,8 @@ class FriendRepositoryTest {
     @Test
     public void whenAllFind() {
         var friend = new Friend();
-        friend.setUserMain(user);
-        friend.setUserFriend(user2);
+        friend.setToUser(user);
+        friend.setFromUser(user2);
         friend.setStatus("friend");
         friendRepository.save(friend);
         var found = friendRepository.findAll();

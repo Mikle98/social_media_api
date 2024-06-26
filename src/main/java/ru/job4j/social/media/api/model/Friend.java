@@ -16,12 +16,12 @@ public class Friend {
     private long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_main")
-    private User userMain;
+    @JoinColumn(name = "toUser")
+    private User toUser;
 
     @ManyToOne
-    @JoinColumn(name = "user_friend")
-    private User userFriend;
+    @JoinColumn(name = "fromUser")
+    private User fromUser;
 
     private String status;
 }

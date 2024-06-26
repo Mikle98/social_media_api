@@ -36,7 +36,7 @@ class PostRepositoryTest {
         var post = new Post();
         post.setTitle("title");
         post.setDescription("description");
-        post.setUser(user);
+        post.setUserId(user);
         postRepository.save(post);
         var found = postRepository.findById(post.getId());
         assertThat(found).isPresent();
@@ -48,7 +48,7 @@ class PostRepositoryTest {
         var post = new Post();
         post.setTitle("title");
         post.setDescription("description");
-        post.setUser(user);
+        post.setUserId(user);
         postRepository.save(post);
         var posts = postRepository.findAll();
         assertThat(posts).hasSize(1);

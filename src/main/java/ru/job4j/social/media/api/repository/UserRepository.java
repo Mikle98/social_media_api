@@ -30,7 +30,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
             u.email
             FROM User u
             INNER JOIN Friend f
-                ON f.userFriend.id = ?1
+                ON f.fromUser.id = ?1
                 AND f.status = 'folower'
             """)
     public List<User> findAllFollowers(long id);
