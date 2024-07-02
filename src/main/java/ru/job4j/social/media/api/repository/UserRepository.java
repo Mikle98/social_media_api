@@ -23,17 +23,30 @@ public interface UserRepository extends CrudRepository<User, Long> {
     public int changeNameWithHQL(String oldName, String newName);
 
     @Query("""
-            SELECT 
+            SELECT
+            new User (
             u.id,
             u.login,
             u.password,
-            u.email
-            FROM User u
-            INNER JOIN Friend f
-                ON f.fromUser.id = ?1
-                AND f.status = 'folower'
+            u.email)
+            FROM Friend f 
+            INNER JOIN User u
+                on u.id = f.fromUser.id
+            WHERE f.toUser.id = ?1 and f.status = 'follower'
             """)
     public List<User> findAllFollowers(long id);
 
-
+    @Query("""
+            SELECT
+            new User (
+            u.id,
+            u.login,
+            u.password,
+            u.email)
+            FROM Friend f 
+            INNER JOIN User u
+                on u.id = f.fromUser.id
+            WHERE f.toUser.id = ?1 and f.status = 'friend'
+            """)
+    public List<User> findAllFriend(long id);
 }
