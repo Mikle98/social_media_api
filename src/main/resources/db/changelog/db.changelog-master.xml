@@ -4,4 +4,6 @@
     <include file="classpath:db/changelog/scripts/001_ddl_create_users_table.sql" relativeToChangelogFile="false" />
     <include file="classpath:db/changelog/scripts/002_ddl_create_friends_table.sql" relativeToChangelogFile="false" />
     <include file="classpath:db/changelog/scripts/003_ddl_create_posts_table.sql" relativeToChangelogFile="false" />
+    <include file="classpath:db/changelog/scripts/004_ddl_create_files_table.sql" relativeToChangelogFile="false" />
+    <include file="classpath:db/changelog/scripts/005_ddl_alert_posts_table.sql" relativeToChangelogFile="false" />
 </databaseChangeLog>

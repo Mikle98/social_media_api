@@ -49,4 +49,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
             WHERE f.toUser.id = ?1 and f.status = 'friend'
             """)
     public List<User> findAllFriend(long id);
+
+    public Optional<User> findByEmail(String email);
 }

@@ -1,7 +1,12 @@
 package ru.job4j.social.media.api.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +14,12 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.job4j.social.media.api.model.User;
 import ru.job4j.social.media.api.repository.UserRepository;
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -20,6 +30,9 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new DataIntegrityViolationException("Email already exists");
+        }
         userRepository.save(user);
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -40,6 +53,9 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<Void> updateUser(@RequestBody User user) {
+        if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+            throw new DataIntegrityViolationException("Email already exists");
+        }
         var optionalUser = userRepository.findById(user.getId());
         if (optionalUser.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -57,5 +73,18 @@ public class UserController {
         return  userRepository.findById(id).isEmpty()
                     ? ResponseEntity.noContent().build()
                     : ResponseEntity.notFound().build();
+    }
+
+    @ExceptionHandler(value = {DataIntegrityViolationException.class})
+    public void catchEmailUniversalExeption(Exception ex, HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        Map<String, String> details = new HashMap<>();
+        details.put("message", ex.getMessage());
+        details.put("type", String.valueOf(ex.getClass()));
+        details.put("timestamp", String.valueOf(LocalDateTime.now()));
+        details.put("path", request.getRequestURI());
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        response.setContentType("application/json; charset=utf-8");
+        response.getWriter().write(new ObjectMapper().writeValueAsString(details));
     }
 }
