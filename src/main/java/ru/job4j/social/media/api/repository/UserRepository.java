@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import ru.job4j.social.media.api.model.Friend;
 import ru.job4j.social.media.api.model.User;
+import ru.job4j.social.media.api.model.UsersDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,4 +52,17 @@ public interface UserRepository extends CrudRepository<User, Long> {
     public List<User> findAllFriend(long id);
 
     public Optional<User> findByEmail(String email);
+
+    @Query("""
+            SELECT 
+            new ru.job4j.social.media.api.model.UsersDTO (u.id,
+            u.email,
+            p
+            )
+            FROM User u
+            LEFT JOIN Post p 
+                on u.id = p.userId.id
+            where u.id in (?1)
+            """)
+    public List<UsersDTO> findAllUsersAndReturnDTO(List<Long> id);
 }
