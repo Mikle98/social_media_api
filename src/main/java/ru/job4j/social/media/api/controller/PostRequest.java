@@ -1,14 +1,17 @@
 package ru.job4j.social.media.api.controller;
 
 import jakarta.persistence.GeneratedValue;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import ru.job4j.social.media.api.model.Post;
 import ru.job4j.social.media.api.repository.PostRepository;
+import ru.job4j.social.media.api.validation.Operation;
 
 import java.util.List;
 
@@ -27,7 +30,8 @@ public class PostRequest {
     }
 
     @PostMapping
-    public ResponseEntity<Post> postPost(@RequestBody Post post) {
+    @Validated(Operation.OnCreate.class)
+    public ResponseEntity<Post> postPost(@Valid @RequestBody Post post) {
         postRepository.save(post);
         var uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
